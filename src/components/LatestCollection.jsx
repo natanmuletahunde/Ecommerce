@@ -8,7 +8,7 @@ const LatestCollection = () => {
     const [latestProducts, setLatestProducts] = useState([]);  // ✅ Fixed
 
     useEffect(()=>{
-      setLatestProducts(products.slice(10,35));
+      setLatestProducts(products.slice(0,10));
     },[products]);  // ✅ Added dependency to avoid empty products
 
   return (
