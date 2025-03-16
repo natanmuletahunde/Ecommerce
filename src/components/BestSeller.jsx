@@ -9,7 +9,7 @@ const BestSeller = () => {
     
   useEffect(()=> {
     const bestProduct = products.filter((item)=>(item.bestSeller));
-    setBestSeller(bestProduct.slice(5,10));
+    setBestSeller(bestProduct.slice(0,5));
   }, [products]); // Added products to dependency array
 
   return (
