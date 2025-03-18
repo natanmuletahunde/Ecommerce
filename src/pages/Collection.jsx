@@ -9,10 +9,56 @@ const Collection = () => {
   const [filterProducts ,setFilterProducts] = useState([]);
   const [category,setCategory] = useState([]);
   const [subCategory , setSubCategory] =useState([]);
+   
+  const toggleCategory = (e) =>{
+    if(category.includes(e.target.value)){
+         setCategory(prev=>prev.filter(item=> item !==e.target.value))
+    }
+    else{
+          setCategory(prev => [...prev,e.target.value]) 
+    }
+  } 
+    const toggleSubCategory = (e) =>{
+      if(subCategory.includes(e.target.value)){
+        setSubCategory(prev=>prev.filter(item => item!==e.target.value))
+      }
+      else{
+        setSubCategory(prev => [...prev,e.target.value])
+      }
+    }
+     
+    const applyFilter = () => {
+      let productsCopy = products.slice();  // Step 1: Create a copy of the products array
+    
+      if (category.length > 0) {           // Step 2: Check if any category is selected
+        productsCopy = productsCopy.filter(item => category.includes(item.category));
+        // Step 3: Filter products that belong to the selected categories
+      }
+      if (subCategory.length>0){
+        productsCopy = productsCopy.filter(item=> subCategory.includes(item.subCategory))
+      }
+      setFilterProducts(productsCopy)
+    };
 
-useEffect(()=>{
-  setFilterProducts(products)
-},[])
+    const sortProduct=()=>{
+          let fpCopy = filterProducts.slice() //  used to  create the copy of product 
+      switch(sortType)
+      {
+        case 'low-high':
+          setFilterProducts(fpCopy.sort((a,b)=>(a.price-b.price)));
+          break;
+        case 'high-low':
+          setFilterProducts(fpCopy.sort((a,b)=>(b.price-a.price)));
+          break;
+        default:
+          applyFilter();
+          break;
+      }
+    }
+  
+useEffect(() =>{
+      applyFilter()
+},[category,subCategory])
 
   return (
     <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t'>
@@ -28,13 +74,13 @@ useEffect(()=>{
             <p className='mb-3 text-sm font-medium'>CATEGORIES</p>
             <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
               <p className='flex gap-2'>
-                <input className='w-3' type="checkbox" value={'Men'} /> Men
+                <input className='w-3' type="checkbox" value={'Men'} onChange={toggleCategory}/> Men
               </p>
               <p className='flex gap-2'>
-                <input className='w-3' type="checkbox" value={'Women'} /> Women
+                <input className='w-3' type="checkbox" value={'Women'} onChange={toggleCategory}/> Women
               </p>
               <p className='flex gap-2'>
-                <input className='w-3' type="checkbox" value={'Kids'} /> Kids
+                <input className='w-3' type="checkbox" value={'Kids'}  onChange={toggleCategory}/> Kids
               </p>
             </div>
           </div>
@@ -44,13 +90,13 @@ useEffect(()=>{
             <p className='mb-3 text-sm font-medium'>TYPE</p>
             <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
               <p className='flex gap-2'>
-                <input className='w-3' type="checkbox" value={'TopWear'} /> TopWear
+                <input className='w-3' type="checkbox" value={'TopWear'} onChange={toggleSubCategory}  /> TopWear
               </p>
               <p className='flex gap-2'>
-                <input className='w-3' type="checkbox" value={'BottomWear'} />BottomWear 
+                <input className='w-3' type="checkbox" value={'BottomWear'} onChange={toggleSubCategory} />BottomWear 
               </p>
               <p className='flex gap-2'>
-                <input className='w-3' type="checkbox" value={'WinterWear'} /> WinterWear
+                <input className='w-3' type="checkbox" value={'WinterWear'} onChange={toggleSubCategory} /> WinterWear
               </p>
             </div>
           </div>
