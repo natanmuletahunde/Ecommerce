@@ -1,10 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { ShopContext } from '../context/ShopContext';
 import { assets } from '../assets/assets';
+import { useLocation } from 'react-router-dom';
 
 const SearchBar = () => {
   const { search, setSearch, showSearch, setShowSearch } = useContext(ShopContext);
+  const location = useLocation();
 
+  useEffect(()=>{
+    console.log(location.pathname)
+  },[location])
   // Function to handle search input change
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
