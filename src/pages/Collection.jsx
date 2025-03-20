@@ -5,13 +5,13 @@ import Title from '../components/Title';
 import ProductItem from '../components/ProductItem'; // Ensure correct path
 
 const Collection = () => {
-  const { products } = useContext(ShopContext);
+  const { products, search, showSearch } = useContext(ShopContext);
   const [showFilter, setShowFilter] = useState(false);
   const [filterProducts, setFilterProducts] = useState([]);
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
   const [sortType, setSortType] = useState('relavent');
-
+    
   const toggleCategory = (e) => {
     if (category.includes(e.target.value)) {
       setCategory((prev) => prev.filter((item) => item !== e.target.value));
@@ -31,6 +31,13 @@ const Collection = () => {
   const applyFilter = () => {
     let productsCopy = products.slice(); // Step 1: Create a copy of the products array
 
+    // Fixed search filter (using toLowerCase correctly)
+    if (showSearch && search) {
+      productsCopy = productsCopy.filter((item) =>
+        item.name.toLowerCase().includes(search.toLowerCase()) // Fixed typo
+      );
+    }
+  
     if (category.length > 0) {
       // Step 2: Check if any category is selected
       productsCopy = productsCopy.filter((item) => category.includes(item.category));
@@ -67,7 +74,7 @@ const Collection = () => {
 
   useEffect(() => {
     applyFilter();
-  }, [category, subCategory]);
+  }, [category, subCategory, search, showSearch]);
 
   useEffect(() => {
     sortProduct();

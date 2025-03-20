@@ -5,7 +5,7 @@ import { ShopContext } from '../context/ShopContext';
 
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
-  const { setShowSearch } = useContext(ShopContext); // ✅ Use useContext instead of useState
+  const {setShowSearch} = useContext(ShopContext); // ✅ Use useContext instead of useState
 
   return (
     <div className='flex items-center justify-between py-5 font-medium'>
