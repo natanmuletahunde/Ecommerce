@@ -64,8 +64,29 @@ const Product = () => {
                 </div>
              </div>
              <button className="bg-black text-white  text-sm active:bg-gray-700">Add To Cart</button>
+              <hr  className="mt-8 sm:w-4/5"/>
+              <div className="text-sm text-gray-500 mt-5 flex flex-col gap-1">
+                <p>100% Original product</p>
+                <p> Cash on delivery is available on this product.</p>
+                <p> Easy return exchange policy within 7 days</p>
+              </div>
         </div>
       </div>
+
+
+       <div className="mt-20">
+ <div className="flex">
+  <b className="border px-5 text-sm"> Description</b>
+  <p className="border px-5 text-sm">Review (122) </p>
+ </div>
+     <div className="flex flex-col gap-4 border px-6 text-sm text-gray-500">
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet officia eligendi dignissimos aspernatur a, consectetur beatae quisquam iste dolore officiis ad error sunt autem illum qui, vitae quaerat vero accusantium. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus, temporibus facere. Voluptate, cumque itaque consequuntur vel repellat aut? Deserunt perspiciatis quia tenetur officiis adipisci consectetur facilis non esse veritatis. Eligendi.</p>
+      <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam natus unde ipsum magni laudantium corporis distinctio sequi tempora rem ducimus nihil rerum optio, facere in quis omnis veritatis! Rerum, voluptatem!</p>
+     </div>
+       </div>
+
+       <div></div>
+
     </div>
   ) : (
     <div className="opacity-0"></div>
